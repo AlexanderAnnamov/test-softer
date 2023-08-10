@@ -1,0 +1,92 @@
+@import '../../scss/variables';
+
+.auth{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__window{
+        background-color: #fff;
+        padding: 20px;
+        width: 40%;
+        height: 40%;
+        box-shadow: 2px 5px 10px rgba(87, 87, 87, 0.292);
+        border-radius: 10px;
+        overflow: hidden;
+
+        
+    }
+    &__items_column{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+       justify-content: space-between;
+      
+    }
+    &__btn_column{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 20px;
+    }
+    &__disk_btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+        min-width: 180px;
+        height: 40px;
+        border: 2px solid #2e72de;
+        border-radius: 10px;
+        color: black;
+        text-align: center;
+    }
+    &__disk_btn:hover{
+       
+       background-color: #2e72de;
+       color: #fff;
+    }
+    &__ya_btn{
+        width: 100%;
+        height: 40px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: black;
+        padding: 0 20px;
+    }
+    &__ya_btn:hover{
+       background-color: $yandex;
+       color: black;
+    }
+    &__warning_text{
+        font-size: 15px;
+        text-align: center;
+    }
+    &__ya_disk{
+        font-weight: bold;
+        margin: 0 0 0 29px;
+        position: relative;
+    }
+    &__ya_disk:hover{   
+       text-decoration:underline;
+    }
+    &__ya_disk:before{
+        position: absolute;
+        background-size: 25px 25px;
+        width: 25px; height: 25px;
+        color: $yandex;
+        content: '';
+        background-image: url('../../assets/yandex-disk.svg');
+        left: -28px; top: -4px
+        // position: absolute;
+    }
+    @media (max-width: 768px) { 
+        &__window{
+            width: 80%;
+        }
+     }
+}

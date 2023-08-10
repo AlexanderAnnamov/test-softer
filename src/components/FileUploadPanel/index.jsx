@@ -1,0 +1,103 @@
+import React from "react";
+import styles from "./FileUploadPanel.module.scss";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setWarningDoubleFile,
+  removeHandleFile,
+  resetSession,
+  setCounterSuccessUp,
+  setIsLoading,
+} from "../../redux/uploadFiles";
+
+export const FileUploadPanel = () => {
+  const token = useSelector((state) => state.token.oAuth);
+  const files = useSelector((state) => state.uploadFiles.handleFiles);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.uploadFiles.isLoading);
+  let controller = new AbortController();
+
+  const resetFiles = () => {
+    dispatch(setWarningDoubleFile(false));
+    dispatch(resetSession());
+  };
+
+  const uploadUrl = async (url, file) => {
+    console.log("Request uploadFiles put FILE");
+    const formData = new FormData();
+    formData.append("file", file);
+    const response = await fetch(url, {
+      signal: controller.signal,
+      method: "PUT",
+      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    if (response.status === 201) {
+      console.log(response);
+      dispatch(removeHandleFile(file.name));
+      dispatch(setCounterSuccessUp());
+    } else {
+    }
+  };
+
+  const uploadFiles = async (files) => {
+    console.log("Request uploadFiles get URL");
+    dispatch(setIsLoading(true));
+    files.map(async (item, idx) => {
+      const responseUrl = await fetch(
+        `https://cloud-api.yandex.net/v1/disk/resources/upload?path=${item.name}&overwrite=false`,
+        {
+          signal: controller.signal,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token,
+          },
+        }
+      );
+
+      if (responseUrl.status === 200) {
+        const data = await responseUrl.json();
+        uploadUrl(data.href, item);
+      }
+    });
+  };
+
+  const cancelRequest = () => {
+    controller.abort();
+    dispatch(setIsLoading(false));
+  };
+
+  React.useEffect(() => {
+    if (files.length === 0) {
+      dispatch(setIsLoading(false));
+    }
+  });
+
+  return (
+    <div className={styles.fileUploadPanel}>
+      <div className={styles.fileUploadPanel__items}>
+        <button
+          onClick={() => uploadFiles(files)}
+          disabled={files.length === 0 || loading}
+          className={
+            styles.fileUploadPanel__upload + " " + styles.fileUploadPanel__btn
+          }
+        >
+          Загрузить
+        </button>
+        <button
+          onClick={loading ? cancelRequest : resetFiles}
+          className={
+            styles.fileUploadPanel__cancel + " " + styles.fileUploadPanel__btn
+          }
+        >
+          {loading ? <>Отменить</> : <>Сбросить</>}
+        </button>
+      </div>
+    </div>
+  );
+};

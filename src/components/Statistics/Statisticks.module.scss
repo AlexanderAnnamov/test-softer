@@ -1,0 +1,33 @@
+@import '../../scss/variables';
+
+.statistics{
+    margin: 5px 0 0 0;
+    width: 100%;
+    box-shadow: 2px 5px 10px rgba(87, 87, 87, 0.137);
+    border-radius: 10px;
+    min-height: 108px;
+    position: relative;
+    padding: 15px;
+    height: 20%;
+    overflow: hidden;
+    background-color: #fff;
+    
+    &__row{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__text{
+        
+        font-size: 15px;
+        color: #000000a2;
+    }
+    &__text_indicator{
+        font-size: 15px;
+    }
+
+    &__text_green{
+        color: #21BA72;
+        font-weight: bold;
+    }
+}
