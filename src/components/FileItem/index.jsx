@@ -42,6 +42,10 @@ const FileItem = ({
   const moderPath = path.split("/")[1];
   const { setContextMenu } = useContextMenu();
 
+  const downloadFile = (url) => {
+    window.open(url);
+  };
+
   const deleteFile = async (path) => {
     console.log(`Request delete file ${path}`);
     dispatch(setIsLoading(true));
@@ -69,7 +73,9 @@ const FileItem = ({
     },
     {
       name: "Скачать",
-      onClick: () => {},
+      onClick: () => {
+        downloadFile(downloadUrl);
+      },
     },
     {
       name: "Открыть",
