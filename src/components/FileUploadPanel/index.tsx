@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./FileUploadPanel.module.scss";
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   setWarningDoubleFile,
@@ -9,11 +9,13 @@ import {
   setIsLoading,
 } from "../../redux/uploadFiles";
 
-export const FileUploadPanel = () => {
-  const token = useSelector((state) => state.token.oAuth);
-  const files = useSelector((state) => state.uploadFiles.handleFiles);
+import styles from "./FileUploadPanel.module.scss";
+
+export const FileUploadPanel: React.FC = () => {
+  const token = useSelector((state: any) => state.token.oAuth);
+  const files = useSelector((state: any) => state.uploadFiles.handleFiles);
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.uploadFiles.isLoading);
+  const loading = useSelector((state: any) => state.uploadFiles.isLoading);
   let controller = new AbortController();
 
   const resetFiles = () => {
@@ -21,7 +23,7 @@ export const FileUploadPanel = () => {
     dispatch(resetSession());
   };
 
-  const uploadUrl = async (url, file) => {
+  const uploadUrl = async (url: string, file: any) => {
     console.log("Request uploadFiles put FILE");
     const formData = new FormData();
     formData.append("file", file);
@@ -43,10 +45,10 @@ export const FileUploadPanel = () => {
     }
   };
 
-  const uploadFiles = async (files) => {
+  const uploadFiles = async (files: any) => {
     console.log("Request uploadFiles get URL");
     dispatch(setIsLoading(true));
-    files.map(async (item, idx) => {
+    files.map(async (item: any) => {
       const responseUrl = await fetch(
         `https://cloud-api.yandex.net/v1/disk/resources/upload?path=${item.name}&overwrite=false`,
         {

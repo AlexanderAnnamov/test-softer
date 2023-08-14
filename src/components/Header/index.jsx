@@ -11,9 +11,16 @@ import userImg from "../../assets/img/user.png";
 
 import styles from "./Header.module.scss";
 
+// type IHeader = {
+//   logout: () => {}
+// }
+
+// :React.FC<IHeader>
+
 const Header = ({ logout }) => {
   const token = useSelector((state) => state.token.oAuth);
   const [userId, setUserId] = React.useState();
+  console.log("user id", userId);
 
   React.useEffect(() => {
     console.log("Request userId");

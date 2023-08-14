@@ -4,16 +4,19 @@ import { useContextMenu } from "../../hooks/useContextMenu";
 import { ContextMenuItem } from "../../context/ContextMenu/ContextMenu.context";
 import { useSelector, useDispatch } from "react-redux";
 import { setRequestFiles } from "../../redux/uploadFiles";
+import { IFile } from "../../models/IFile";
 
 import FileItem from "../FileItem";
+
 import FileSkeleton from "./FileSkeleton";
 
 import styles from "./File.module.scss";
 
+
 const FileManager: React.FC = () => {
 
   const success = useSelector((state: any) => state.uploadFiles.counterSuccessUp);
-  const files = useSelector((state: any) => state.uploadFiles.requestFiles);
+  const files: IFile[] = useSelector((state: any) => state.uploadFiles.requestFiles);
   const token = useSelector((state: any) => state.token.oAuth);
   const [isLoading, setIsLoading] = React.useState(false);
   const { setContextMenu } = useContextMenu();
@@ -57,7 +60,16 @@ const FileManager: React.FC = () => {
         .then((res) => res.json())
         .then((response) => {
           setIsLoading(false);
-          dispatch(setRequestFiles(response.items));
+          const filterFiles: IFile[] =  response.items.map((item) => {
+          return {key: item?.sha256,
+            name: item?.name,
+            url: item?.file,
+            extention: item?.media_type,
+            preview: item?.preview,
+            path: item?.path,
+          }
+          })
+          dispatch(setRequestFiles(filterFiles));
         });
     }
   }, [token, success]);
@@ -73,7 +85,7 @@ const FileManager: React.FC = () => {
                   key={obj?.sha256}
                   name={obj?.name}
                   downloadUrl={obj?.file}
-                  extentionFile={obj?.media_type}
+                  extentionFile={obj?.extention}
                   previewFile={obj?.preview}
                   path={obj?.path}
                   idx={idx}

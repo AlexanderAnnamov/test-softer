@@ -9,7 +9,7 @@ import loadingImg from "../../assets/img/loading.gif";
 
 import styles from "./PreviewFileItem.module.scss";
 
-const PreviewFileItem = ({ name, date, size, type, idx }) => {
+const PreviewFileItem = ({ name, date, size, type }) => {
   const isLoading = useSelector((state) => state.uploadFiles.isLoading);
   const dispatch = useDispatch();
 

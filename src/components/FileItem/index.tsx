@@ -28,7 +28,16 @@ export const extention = {
   "": unknownImg,
 };
 
-const FileItem = ({
+ type FileItemProps = {
+  name: string,
+  downloadUrl: string,
+  extentionFile: string,
+  previewFile: string,
+  path: string,
+  idx: number
+}
+
+const FileItem: React.FC<FileItemProps> = ({
   name,
   downloadUrl,
   extentionFile,
@@ -36,16 +45,17 @@ const FileItem = ({
   path,
   idx,
 }) => {
-  const token = useSelector((state) => state.token.oAuth);
+
+  const token = useSelector((state: any) => state.token.oAuth);
   const dispatch = useDispatch();
   const moderPath = path.split("/")[1];
   const { setContextMenu } = useContextMenu();
 
-  const downloadFile = (url) => {
+  const downloadFile = (url: string) => {
     window.open(url);
   };
 
-  const deleteFile = async (path) => {
+  const deleteFile = async (path: string) => {
     console.log(`Request delete file ${path}`);
     dispatch(setIsLoading(true));
     const response = await fetch(
@@ -86,7 +96,7 @@ const FileItem = ({
         deleteFile(moderPath);
       },
     },
-  ]);
+  ],[]);
 
   const handleContextMenu = React.useCallback(
     (event) => {
