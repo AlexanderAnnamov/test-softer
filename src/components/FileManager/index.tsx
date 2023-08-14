@@ -1,34 +1,38 @@
 import React from "react";
-import styles from "./File.module.scss";
-import FileItem from "../FileItem";
+
+import { useContextMenu } from "../../hooks/useContextMenu";
+import { ContextMenuItem } from "../../context/ContextMenu/ContextMenu.context";
 import { useSelector, useDispatch } from "react-redux";
 import { setRequestFiles } from "../../redux/uploadFiles";
-import FileSkeleton from "./FileSkeleton";
-import { useContextMenu } from "../../hooks/useContextMenu";
 
-const FileManager = () => {
-  const token = useSelector((state) => state.token.oAuth);
-  const files = useSelector((state) => state.uploadFiles.requestFiles);
-  const success = useSelector((state) => state.uploadFiles.counterSuccessUp);
-  const dispatch = useDispatch();
+import FileItem from "../FileItem";
+import FileSkeleton from "./FileSkeleton";
+
+import styles from "./File.module.scss";
+
+const FileManager: React.FC = () => {
+
+  const success = useSelector((state: any) => state.uploadFiles.counterSuccessUp);
+  const files = useSelector((state: any) => state.uploadFiles.requestFiles);
+  const token = useSelector((state: any) => state.token.oAuth);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { setContextMenu } = useContextMenu();
   const skeletons = [...new Array(6)].map((_, index) => (
     <FileSkeleton key={index} />
   ));
-  const [isLoading, setIsLoading] = React.useState(false);
-  const { setContextMenu } = useContextMenu();
+  const dispatch = useDispatch();
 
-  const contextMenu = React.useMemo(() => [
-    {
-      name: "Новый файл",
-      onClick: () => {},
-    },
-    { name: "Текстовый документ", onClick: () => {} },
-    { name: "Таблица", onClick: () => {} },
-    { name: "Презентация", onClick: () => {} },
-  ]);
+  const contextMenu = React.useMemo<ContextMenuItem[]>(() => [
+
+    { name: "Новый файл",onClick: () => console.log('New file')},
+    { name: "Текстовый документ", onClick: () => console.log('Text file')},
+    { name: "Таблица", onClick: () => console.log('Table file') },
+    { name: "Презентация", onClick: () => console.log('PP file') },
+    
+  ], []);
 
   const handleContextMenu = React.useCallback(
-    (event) => {
+    (event: React.MouseEvent<HTMLDivElement>) => {
       event.preventDefault();
       const { clientX, clientY } = event;
       setContextMenu(contextMenu, [clientX, clientY]);
@@ -64,7 +68,7 @@ const FileManager = () => {
         <div className={styles.manager__items}>
           {isLoading
             ? skeletons
-            : files?.map((obj, idx) => (
+            : files?.map((obj:any, idx:any) => (
                 <FileItem
                   key={obj?.sha256}
                   name={obj?.name}
