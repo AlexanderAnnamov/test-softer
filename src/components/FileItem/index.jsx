@@ -1,31 +1,31 @@
 import React from "react";
-import img from "../../assets/image.svg";
-import deleteImg from "../../assets/delete-file.svg";
-import download from "../../assets/download.png";
-import styles from "./FileItem.module.scss";
-import music from "../../assets/music.svg";
-import loading from "../../assets/loading.gif";
-import unknown from "../../assets/unknown.png";
-import video from "../../assets/video.png";
-import document from "../../assets/document.svg";
+
+import imageImg from "../../assets/img/image.svg";
+import musicImg from "../../assets/img/music.svg";
+import unknownImg from "../../assets/img/unknown.png";
+import videoImg from "../../assets/img/video.png";
+import documentImg from "../../assets/img/document.svg";
+
 import { useSelector, useDispatch } from "react-redux";
 import { removeRequestFile } from "../../redux/uploadFiles";
 import { useContextMenu } from "../../hooks/useContextMenu";
 import { setIsLoading } from "../../redux/fileManager";
 
+import styles from "./FileItem.module.scss";
+
 export const extention = {
-  image: img,
-  audio: music,
-  video: video,
-  document: document,
-  "application/pdf": document,
-  "image/jpeg": img,
-  "audio/mpeg": music,
-  "video/mp4": video,
-  "application/msword": document,
+  image: imageImg,
+  audio: musicImg,
+  video: videoImg,
+  document: documentImg,
+  "application/pdf": documentImg,
+  "image/jpeg": imageImg,
+  "audio/mpeg": musicImg,
+  "video/mp4": videoImg,
+  "application/msword": documentImg,
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-    document,
-  "": unknown,
+    documentImg,
+  "": unknownImg,
 };
 
 const FileItem = ({
@@ -36,7 +36,6 @@ const FileItem = ({
   path,
   idx,
 }) => {
-  // const [isLoading, setIsLoading] = React.useState(false);
   const token = useSelector((state) => state.token.oAuth);
   const dispatch = useDispatch();
   const moderPath = path.split("/")[1];

@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import React from "react";
 
 export interface ContextMenuItem {
     name: string;
@@ -9,7 +9,7 @@ interface ContextMenuModel {
     setContextMenu:(items: ContextMenuItem[], position:number[]) => void;
 }
 
- const ContextMenu = createContext<ContextMenuModel>({
+ const ContextMenu = React.createContext<ContextMenuModel>({
     setContextMenu: () => {},
 })
 

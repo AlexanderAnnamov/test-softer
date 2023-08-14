@@ -1,10 +1,13 @@
 import React from "react";
-import styles from "./PreviewFileItem.module.scss";
-import deleteImg from "../../assets/delete-preview.svg";
-import loading from "../../assets/loading.gif";
+
 import { useDispatch, useSelector } from "react-redux";
 import { removeHandleFile } from "../../redux/uploadFiles";
 import { extention } from "../FileItem";
+
+import deleteImg from "../../assets/img/delete-preview.svg";
+import loadingImg from "../../assets/img/loading.gif";
+
+import styles from "./PreviewFileItem.module.scss";
 
 const PreviewFileItem = ({ name, date, size, type, idx }) => {
   const isLoading = useSelector((state) => state.uploadFiles.isLoading);
@@ -48,7 +51,7 @@ const PreviewFileItem = ({ name, date, size, type, idx }) => {
         ></img>
         {isLoading && (
           <div className={styles.previewFileItem__loading}>
-            <img src={loading} alt="loading..."></img>
+            <img src={loadingImg} alt="loading..."></img>
           </div>
         )}
       </div>

@@ -1,12 +1,15 @@
 import React from "react";
-import styles from "./Header.module.scss";
-import { useSelector } from "react-redux";
-import logo from "../../assets/softer.png";
-import logoutImg from "../../assets/logout.svg";
-import user from "../../assets/user.png";
-import { Link } from "react-router-dom";
+
 import { YandexLogout } from "react-yandex-login";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import UserSkeleton from "./UserSkeleton";
+import logoImg from "../../assets/img/softer.png";
+import logoutImg from "../../assets/img/logout.svg";
+import userImg from "../../assets/img/user.png";
+
+import styles from "./Header.module.scss";
 
 const Header = ({ logout }) => {
   const token = useSelector((state) => state.token.oAuth);
@@ -32,7 +35,7 @@ const Header = ({ logout }) => {
         <div className={styles.header__items}>
           <Link to="/">
             <div className={styles.header__logo}>
-              <img src={logo} alt="softer logo" />
+              <img src={logoImg} alt="softer logo" />
               <div>
                 <h1 className={styles.header__logo_text}>Софтер</h1>
               </div>
@@ -53,7 +56,7 @@ const Header = ({ logout }) => {
                         Страна: {userId?.user?.country}
                       </h2>
                     </div>
-                    <img src={user} alt="avatar logo!" />
+                    <img src={userImg} alt="avatar logo!" />
                   </>
                 )}
               </div>

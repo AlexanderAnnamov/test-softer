@@ -1,43 +1,45 @@
 import React from "react";
-import styles from "./DragAndDrop.module.scss";
+
 import { useDispatch } from "react-redux";
 import { setHandleFiles } from "../../redux/uploadFiles";
 
-const DragAndDrop = () => {
-  const [drag, setDrag] = React.useState(false);
-  const [onMouse, setOnMouse] = React.useState(false);
+import styles from "./DragAndDrop.module.scss";
+
+const DragAndDrop: React.FC = () => {
+
+  const [drag, setDrag] = React.useState<boolean>(false);
+  const [onMouse, setOnMouse] = React.useState<boolean>(false);
+  
   const dispatch = useDispatch();
 
-  const dragStartHandler = (e) => {
+  const dragStartHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDrag(true);
   };
 
-  const dragLeavetHandler = (e) => {
+  const dragLeavetHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDrag(false);
   };
 
-  const mouseOverHandler = (e) => {
+  const mouseOverHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     setOnMouse(true);
   };
 
-  const mouseOutHandler = (e) => {
+  const mouseOutHandler = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     setOnMouse(false);
   };
 
-  const onDropHandler = (e) => {
+  const onDropHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     let files = [...e.dataTransfer.files];
-    files.map((item) => {
-      dispatch(setHandleFiles(item));
-    });
+    files.map((item) => dispatch(setHandleFiles(item)));
     setDrag(false);
   };
 
-  const handleFileAdd = (e) => {
+  const handleFileAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       dispatch(setHandleFiles(e.target.files[0]));
     }
