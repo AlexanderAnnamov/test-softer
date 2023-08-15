@@ -1,15 +1,16 @@
 import React from "react";
-
-import { useDispatch } from "react-redux";
-import { setUserToken } from "../../redux/token";
 import { YandexLogin } from "react-yandex-login";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useDispatch } from "react-redux";
 
+import { setUserToken } from "../../redux/token";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Client from "../Client";
 
 import styles from "./Auth.module.scss";
 
 const clientID = "ca290a97faf0451593abd11b5a869f2e";
+
+const yandexDiskUrl = "https://passport.yandex.ru/auth/welcome?from=cloud&origin=disk_landing_web_signin_ru&retpath=https%3A%2F%2Fdisk.yandex.ru%2Fclient%2Fdisk&backpath=https%3A%2F%2Fdisk.yandex.ru";
 
 const Auth = () => {
   const [userData, setUserData] = useLocalStorage({}, "userData");
@@ -42,7 +43,7 @@ const Auth = () => {
                 Softer-storage использует api{" "}
                 <a
                   target="blank"
-                  href="https://passport.yandex.ru/auth/welcome?from=cloud&origin=disk_landing_web_signin_ru&retpath=https%3A%2F%2Fdisk.yandex.ru%2Fclient%2Fdisk&backpath=https%3A%2F%2Fdisk.yandex.ru"
+                  href={yandexDiskUrl}
                 >
                   <span className={styles.auth__ya_disk}>Яндекс Диска</span>
                 </a>
@@ -50,7 +51,7 @@ const Auth = () => {
               </p>
               <div className={styles.auth__btn_column}>
                 <a
-                  href="https://passport.yandex.ru/auth/welcome?from=cloud&origin=disk_landing_web_signin_ru&retpath=https%3A%2F%2Fdisk.yandex.ru%2Fclient%2Fdisk&backpath=https%3A%2F%2Fdisk.yandex.ru"
+                  href={yandexDiskUrl}
                   className={styles.auth__disk_btn}
                   target="blank"
                 >
@@ -58,7 +59,7 @@ const Auth = () => {
                 </a>
                 <YandexLogin clientID={clientID} onSuccess={loginSuccess}>
                   <button className={styles.auth__ya_btn}>
-                    Войти с Яндекс ID
+                    Войти c Яндекс ID
                   </button>
                 </YandexLogin>
               </div>

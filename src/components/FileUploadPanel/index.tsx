@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   setWarningDoubleFile,
   removeHandleFile,
@@ -17,7 +18,7 @@ export const FileUploadPanel: React.FC = () => {
   const files = useSelector((state: any) => state.uploadFiles.handleFiles);
   const dispatch = useDispatch();
   const loading = useSelector((state: any) => state.uploadFiles.isLoading);
-  let controller = new AbortController();
+  const controller = new AbortController();
 
   const resetFiles = () => {
     dispatch(setWarningDoubleFile(false));
@@ -59,7 +60,7 @@ export const FileUploadPanel: React.FC = () => {
             Accept: "application/json",
             Authorization: token,
           },
-        }
+        },
       );
 
       if (responseUrl.status === 200) {
