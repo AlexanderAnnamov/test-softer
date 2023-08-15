@@ -9,8 +9,16 @@ import loadingImg from "../../assets/img/loading.gif";
 
 import styles from "./PreviewFileItem.module.scss";
 
-const PreviewFileItem = ({ name, date, size, type }) => {
-  const isLoading = useSelector((state) => state.uploadFiles.isLoading);
+type PreviewFileItemProps = {
+  name: string,
+  size: string,
+  type: string,
+  date: string,
+}
+
+const PreviewFileItem: React.FC<PreviewFileItemProps> = ({ name, date, size, type }) => {
+  
+  const isLoading = useSelector((state: any) => state.uploadFiles.isLoading);
   const dispatch = useDispatch();
 
   const removeElement = (name) => {
@@ -33,8 +41,7 @@ const PreviewFileItem = ({ name, date, size, type }) => {
       </div>
       <div className={styles.previewFileItem__item}>
         <h2 className={styles.previewFileItem__text}>
-          {date.number}.0{date.month + 1}.{date.year}:{date.hours}:
-          {date.minutes}
+    {date}
         </h2>
       </div>
       <div className={styles.previewFileItem__item}>

@@ -10,7 +10,7 @@ import LoadingRemove from "./LoadingRemove";
 import { useSelector } from "react-redux";
 
 type IClient = {
-  logout?: () => {},
+  logout?: () => void,
 }
 
 export const Client: React.FC<IClient> = ({ logout }) => {

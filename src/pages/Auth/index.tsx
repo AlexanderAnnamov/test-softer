@@ -1,10 +1,13 @@
 import React from "react";
+
 import { useDispatch } from "react-redux";
 import { setUserToken } from "../../redux/token";
-import Client from "../Client";
-import styles from "./Auth.module.scss";
 import { YandexLogin } from "react-yandex-login";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+
+import Client from "../Client";
+
+import styles from "./Auth.module.scss";
 
 const clientID = "ca290a97faf0451593abd11b5a869f2e";
 

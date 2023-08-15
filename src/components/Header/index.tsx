@@ -3,6 +3,7 @@ import React from "react";
 import { YandexLogout } from "react-yandex-login";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { IUser } from "../../models/IUser";
 
 import UserSkeleton from "./UserSkeleton";
 import logoImg from "../../assets/img/softer.png";
@@ -11,15 +12,14 @@ import userImg from "../../assets/img/user.png";
 
 import styles from "./Header.module.scss";
 
-// type IHeader = {
-//   logout: () => {}
-// }
+type IHeader = {
+  logout?: () => void
+}
 
-// :React.FC<IHeader>
+const Header: React.FC<IHeader> = ({ logout }) => {
 
-const Header = ({ logout }) => {
-  const token = useSelector((state) => state.token.oAuth);
-  const [userId, setUserId] = React.useState();
+  const token = useSelector((state: any) => state.token.oAuth);
+  const [userId, setUserId] = React.useState<IUser>();
   console.log("user id", userId);
 
   React.useEffect(() => {
@@ -33,9 +33,14 @@ const Header = ({ logout }) => {
         },
       })
         .then((res) => res.json())
-        .then((data) => setUserId(data));
+        .then((data) => {
+          
+          setUserId({name: data?.user?.display_name,
+          country: data?.user?.country });
+        });
     }
   }, [token]);
+  
   return (
     <div className={styles.header}>
       <div className="container">
@@ -57,10 +62,10 @@ const Header = ({ logout }) => {
                   <>
                     <div className={styles.header__user_items}>
                       <h1 className={styles.header__user_name}>
-                        {userId?.user?.display_name}
+                        {userId.name}
                       </h1>
                       <h2 className={styles.header__user_country}>
-                        Страна: {userId?.user?.country}
+                        Страна: {userId.country}
                       </h2>
                     </div>
                     <img src={userImg} alt="avatar logo!" />

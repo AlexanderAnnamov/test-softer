@@ -1,18 +1,20 @@
 import React from "react";
-import styles from "./PreviewUpFiles.module.scss";
-import PreviewFileItem from "../PreviewFileItem";
+
 import { useSelector, useDispatch } from "react-redux";
 import { setWarningDoubleFile } from "../../redux/uploadFiles";
 
-const PreviewUpFiles = () => {
-  const files = useSelector((state) => state.uploadFiles.handleFiles);
-  const warningDoubleFile = useSelector(
-    (state) => state.uploadFiles.warningDoubleFile
-  );
-  const dispatch = useDispatch();
-  const helper =
-    styles.previewUpFiles__transparency + " " + styles.previewUpFiles__text;
+import PreviewFileItem from "../PreviewFileItem";
+
+import styles from "./PreviewUpFiles.module.scss";
+
+
+const PreviewUpFiles: React.FC = () => {
+
+  const files = useSelector((state: any) => state.uploadFiles.handleFiles);  
+  const warningDoubleFile = useSelector((state: any) => state.uploadFiles.warningDoubleFile);
+  const helper = styles.previewUpFiles__transparency + " " + styles.previewUpFiles__text;
   const warning = styles.previewUpFiles__warning;
+  const dispatch = useDispatch();
 
   const setWarning = () => {
     dispatch(setWarningDoubleFile(false));
@@ -36,14 +38,9 @@ const PreviewUpFiles = () => {
             name={obj.name}
             size={obj.size}
             type={obj.type}
-            idx={idx}
-            date={{
-              number: obj.lastModifiedDate?.getDate(),
-              year: obj.lastModifiedDate?.getFullYear(),
-              month: obj.lastModifiedDate?.getMonth(),
-              hours: obj.lastModifiedDate?.getHours(),
-              minutes: obj.lastModifiedDate?.getMinutes(),
-            }}
+            date={ 
+              `${obj.lastModifiedDate?.getDate()}.0${obj.lastModifiedDate?.getMonth() + 1}.${obj.lastModifiedDate?.getFullYear()}:${obj.lastModifiedDate?.getHours()}:${obj.lastModifiedDate?.getMinutes()}`
+            }  
           />
         ))}
       </div>
