@@ -1,14 +1,14 @@
 import React from "react";
-
 import { YandexLogout } from "react-yandex-login";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IUser } from "../../models/IUser";
 
-import UserSkeleton from "./UserSkeleton";
+import { IUser } from "../../models/IUser";
 import logoImg from "../../assets/img/softer.png";
 import logoutImg from "../../assets/img/logout.svg";
 import userImg from "../../assets/img/user.png";
+
+import UserSkeleton from "./UserSkeleton";
 
 import styles from "./Header.module.scss";
 
@@ -18,8 +18,9 @@ type IHeader = {
 
 const Header: React.FC<IHeader> = ({ logout }) => {
 
-  const token = useSelector((state: any) => state.token.oAuth);
+  const token = useSelector((state: any) => state.auth.oAuthToken);
   const [userId, setUserId] = React.useState<IUser>();
+  
   console.log("user id", userId);
 
   React.useEffect(() => {

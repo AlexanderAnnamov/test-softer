@@ -2,7 +2,7 @@ import React from "react";
 import { YandexLogin } from "react-yandex-login";
 import { useDispatch } from "react-redux";
 
-import { setUserToken } from "../../redux/token";
+import { setUserToken } from "../../redux/auth";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Client from "../Client";
 

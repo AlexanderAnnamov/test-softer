@@ -1,6 +1,6 @@
 import React from "react";
-
 import { useDispatch, useSelector } from "react-redux";
+
 import { removeHandleFile } from "../../redux/uploadFiles";
 import { extention } from "../FileItem";
 
@@ -19,6 +19,7 @@ type PreviewFileItemProps = {
 const PreviewFileItem: React.FC<PreviewFileItemProps> = ({ name, date, size, type }) => {
   
   const isLoading = useSelector((state: any) => state.uploadFiles.isLoading);
+
   const dispatch = useDispatch();
 
   const removeElement = (name) => {
@@ -41,7 +42,7 @@ const PreviewFileItem: React.FC<PreviewFileItemProps> = ({ name, date, size, typ
       </div>
       <div className={styles.previewFileItem__item}>
         <h2 className={styles.previewFileItem__text}>
-    {date}
+          {date}
         </h2>
       </div>
       <div className={styles.previewFileItem__item}>

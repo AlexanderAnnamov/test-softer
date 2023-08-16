@@ -2,6 +2,8 @@ import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import { selectUploadFiles } from "../../redux/uploadFiles";
+
 import {
   setWarningDoubleFile,
   removeHandleFile,
@@ -14,10 +16,11 @@ import styles from "./FileUploadPanel.module.scss";
 
 export const FileUploadPanel: React.FC = () => {
   
-  const token = useSelector((state: any) => state.token.oAuth);
-  const files = useSelector((state: any) => state.uploadFiles.handleFiles);
+  const token = useSelector((state: any) => state.auth.oAuthToken);
+  const {handleFiles, isLoading} = useSelector(selectUploadFiles);
+
   const dispatch = useDispatch();
-  const loading = useSelector((state: any) => state.uploadFiles.isLoading);
+
   const controller = new AbortController();
 
   const resetFiles = () => {
@@ -76,7 +79,7 @@ export const FileUploadPanel: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (files.length === 0) {
+    if (handleFiles.length === 0) {
       dispatch(setIsLoading(false));
     }
   });
@@ -85,8 +88,8 @@ export const FileUploadPanel: React.FC = () => {
     <div className={styles.fileUploadPanel}>
       <div className={styles.fileUploadPanel__items}>
         <button
-          onClick={() => uploadFiles(files)}
-          disabled={files.length === 0 || loading}
+          onClick={() => uploadFiles(handleFiles)}
+          disabled={handleFiles.length === 0 || isLoading}
           className={
             styles.fileUploadPanel__upload + " " + styles.fileUploadPanel__btn
           }
@@ -94,12 +97,12 @@ export const FileUploadPanel: React.FC = () => {
           Загрузить
         </button>
         <button
-          onClick={loading ? cancelRequest : resetFiles}
+          onClick={isLoading ? cancelRequest : resetFiles}
           className={
             styles.fileUploadPanel__cancel + " " + styles.fileUploadPanel__btn
           }
         >
-          {loading ? <>Отменить</> : <>Сбросить</>}
+          {isLoading ? <>Отменить</> : <>Сбросить</>}
         </button>
       </div>
     </div>

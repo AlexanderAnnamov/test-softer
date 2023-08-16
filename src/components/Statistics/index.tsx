@@ -2,12 +2,16 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 
+// import { uploadFiles } from "../../redux/uploadFiles";
+
 import styles from "./Statisticks.module.scss";
 
 const Statistics: React.FC = () => {
 
   const files = useSelector((state: any) => state.uploadFiles.handleFiles);
   const success = useSelector((state: any) => state.uploadFiles.counterSuccessUp);
+
+  // const [files, success] = useSelector(uploadFiles)
   const greenIndicator = styles.statistics__text_indicator + " " + styles.statistics__text_green;
 
   return (

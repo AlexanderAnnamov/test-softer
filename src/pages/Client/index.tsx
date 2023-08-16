@@ -1,13 +1,18 @@
 import React from "react";
-import styles from "./Client.module.scss";
+import { useSelector } from "react-redux";
+
+
 import Header from "../../components/Header";
 import FileManager from "../../components/FileManager";
 import DragAndDrop from "../../components/DragAndDrop";
 import PreviewUpFiles from "../../components/PreviewUpFiles";
 import Statistics from "../../components/Statistics";
 import { FileUploadPanel } from "../../components/FileUploadPanel";
+
 import LoadingRemove from "./LoadingRemove";
-import { useSelector } from "react-redux";
+
+import styles from "./Client.module.scss";
+
 
 type IClient = {
   logout?: () => void,

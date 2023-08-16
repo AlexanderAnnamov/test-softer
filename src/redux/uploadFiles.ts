@@ -1,6 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type FileItem = {
+  name: string,
+  downloadUrl: string,
+  extentionFile: string,
+  previewFile: string,
+  path: string,
+  idx: number
+}
+
+interface UploadFilesState {
+  handleFiles: any,
+  requestFiles: FileItem[],
+  warningDoubleFile: boolean,
+  counterSuccessUp: number,
+  isLoading: boolean,
+}
+
+const initialState: UploadFilesState = {
   handleFiles: [],
   requestFiles: [],
   warningDoubleFile: false,
@@ -10,7 +27,7 @@ const initialState = {
 
 export const uploadFilesSlice = createSlice({
   name: "uploadFiles",
-  initialState,
+  initialState, 
   reducers: {
     setHandleFiles: (state, action) => {
       if (state.handleFiles.find((item) => item.name === action.payload.name)) {
@@ -49,6 +66,8 @@ export const uploadFilesSlice = createSlice({
     },
   },
 });
+
+export const selectUploadFiles = (state) => state.uploadFiles;
 
 export default uploadFilesSlice.reducer;
 

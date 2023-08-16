@@ -1,6 +1,6 @@
 import React from "react";
-
 import { useDispatch } from "react-redux";
+
 import { setHandleFiles } from "../../redux/uploadFiles";
 
 import styles from "./DragAndDrop.module.scss";
@@ -34,7 +34,7 @@ const DragAndDrop: React.FC = () => {
 
   const onDropHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    let files = [...e.dataTransfer.files];
+    const files = [...e.dataTransfer.files];
     files.map((item) => dispatch(setHandleFiles(item)));
     setDrag(false);
   };

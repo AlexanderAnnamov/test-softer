@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import imageImg from "../../assets/img/image.svg";
 import musicImg from "../../assets/img/music.svg";
@@ -6,7 +7,6 @@ import unknownImg from "../../assets/img/unknown.png";
 import videoImg from "../../assets/img/video.png";
 import documentImg from "../../assets/img/document.svg";
 
-import { useSelector, useDispatch } from "react-redux";
 import { removeRequestFile } from "../../redux/uploadFiles";
 import { useContextMenu } from "../../hooks/useContextMenu";
 import { setIsLoading } from "../../redux/fileManager";
@@ -37,18 +37,13 @@ export const extention = {
   idx: number
 }
 
-const FileItem: React.FC<FileItemProps> = ({
-  name,
-  downloadUrl,
-  extentionFile,
-  previewFile,
-  path,
-  idx,
-}) => {
+const FileItem: React.FC<FileItemProps> = ({name, downloadUrl, extentionFile, previewFile, path, idx}) => {
 
-  const token = useSelector((state: any) => state.token.oAuth);
+  const token = useSelector((state: any) => state.auth.oAuthToken);
   const dispatch = useDispatch();
-  const moderPath = path.split("/")[1];
+
+  const pathUrl = path.split("/")[1];
+
   const { setContextMenu } = useContextMenu();
 
   const downloadFile = (url: string) => {
@@ -67,7 +62,7 @@ const FileItem: React.FC<FileItemProps> = ({
           Accept: "application/json",
           Authorization: token,
         },
-      }
+      },
     );
     if (response.status === 204) {
       dispatch(setIsLoading(false));
@@ -93,7 +88,7 @@ const FileItem: React.FC<FileItemProps> = ({
     {
       name: "Удалить",
       onClick: () => {
-        deleteFile(moderPath);
+        deleteFile(pathUrl);
       },
     },
   ],[]);
@@ -105,7 +100,7 @@ const FileItem: React.FC<FileItemProps> = ({
       const { clientX, clientY } = event;
       setContextMenu(contextMenu, [clientX, clientY]);
     },
-    [setContextMenu, contextMenu]
+    [setContextMenu, contextMenu],
   );
 
   return (

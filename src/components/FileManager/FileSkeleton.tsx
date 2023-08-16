@@ -9,8 +9,7 @@ const FileSkeleton: React.FC = () => (
     height={72}
     viewBox="0 0 58 72"
     backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
-    >
+    foregroundColor="#ecebeb">
     <rect x="7" y="10" rx="5" ry="5" width="41" height="34" />
     <rect x="7" y="54" rx="7" ry="7" width="42" height="12" />
   </ContentLoader>

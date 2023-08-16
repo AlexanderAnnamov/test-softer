@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { useContextMenu } from "../../hooks/useContextMenu";
 import { ContextMenuItem } from "../../context/ContextMenu/ContextMenu.context";
-import { useSelector, useDispatch } from "react-redux";
+import { selectUploadFiles } from "../../redux/uploadFiles";
 import { setRequestFiles } from "../../redux/uploadFiles";
 import { IFile } from "../../models/IFile";
 
@@ -15,22 +16,25 @@ import styles from "./File.module.scss";
 
 const FileManager: React.FC = () => {
 
-  const success = useSelector((state: any) => state.uploadFiles.counterSuccessUp);
-  const files: IFile[] = useSelector((state: any) => state.uploadFiles.requestFiles);
-  const token = useSelector((state: any) => state.token.oAuth);
+  const {counterSuccessUp, requestFiles} = useSelector(selectUploadFiles);
+  const token = useSelector((state: any) => state.auth.oAuthToken);
+  const dispatch = useDispatch();
+
   const [isLoading, setIsLoading] = React.useState(false);
+
   const { setContextMenu } = useContextMenu();
+
   const skeletons = [...new Array(6)].map((_, index) => (
     <FileSkeleton key={index} />
   ));
-  const dispatch = useDispatch();
+ 
 
   const contextMenu = React.useMemo<ContextMenuItem[]>(() => [
 
-    { name: "Новый файл",onClick: () => console.log('New file')},
-    { name: "Текстовый документ", onClick: () => console.log('Text file')},
-    { name: "Таблица", onClick: () => console.log('Table file') },
-    { name: "Презентация", onClick: () => console.log('PP file') },
+    { name: "Новый файл",onClick: () => console.log("New file")},
+    { name: "Текстовый документ", onClick: () => console.log("New file")},
+    { name: "Таблица", onClick: () => console.log("New file") },
+    { name: "Презентация", onClick: () => console.log("New file") },
     
   ], []);
 
@@ -40,7 +44,7 @@ const FileManager: React.FC = () => {
       const { clientX, clientY } = event;
       setContextMenu(contextMenu, [clientX, clientY]);
     },
-    [setContextMenu, contextMenu]
+    [setContextMenu, contextMenu],
   );
 
   React.useEffect(() => {
@@ -55,24 +59,24 @@ const FileManager: React.FC = () => {
             Accept: "application/json",
             Authorization: token,
           },
-        }
+        },
       )
         .then((res) => res.json())
         .then((response) => {
           setIsLoading(false);
           const filterFiles: IFile[] =  response.items.map((item) => {
-          return {key: item?.sha256,
-            name: item?.name,
-            url: item?.file,
-            extention: item?.media_type,
-            preview: item?.preview,
-            path: item?.path,
-          }
+            return {key: item?.sha256,
+              name: item?.name,
+              url: item?.file,
+              extention: item?.media_type,
+              preview: item?.preview,
+              path: item?.path,
+            }
           })
           dispatch(setRequestFiles(filterFiles));
         });
     }
-  }, [token, success]);
+  }, [token, counterSuccessUp]);
 
   return (
     <div onContextMenu={handleContextMenu} className={styles.manager}>
@@ -80,17 +84,17 @@ const FileManager: React.FC = () => {
         <div className={styles.manager__items}>
           {isLoading
             ? skeletons
-            : files?.map((obj:any, idx:any) => (
-                <FileItem
-                  key={obj?.sha256}
-                  name={obj?.name}
-                  downloadUrl={obj?.file}
-                  extentionFile={obj?.extention}
-                  previewFile={obj?.preview}
-                  path={obj?.path}
-                  idx={idx}
-                />
-              ))}
+            : requestFiles?.map((obj:any, idx:any) => (
+              <FileItem
+                key={obj?.sha256}
+                name={obj?.name}
+                downloadUrl={obj?.file}
+                extentionFile={obj?.extention}
+                previewFile={obj?.preview}
+                path={obj?.path}
+                idx={idx}
+              />
+            ))}
         </div>
       </div>
     </div>
