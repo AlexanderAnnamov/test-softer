@@ -20,7 +20,7 @@ const Header: React.FC<IHeader> = ({ logout }) => {
 
   const token = useSelector((state: any) => state.auth.oAuthToken);
   const [userId, setUserId] = React.useState<IUser>();
-  
+
   console.log("user id", userId);
 
   React.useEffect(() => {
@@ -37,7 +37,7 @@ const Header: React.FC<IHeader> = ({ logout }) => {
         .then((data) => {
           
           setUserId({name: data?.user?.display_name,
-          country: data?.user?.country });
+            country: data?.user?.country });
         });
     }
   }, [token]);
