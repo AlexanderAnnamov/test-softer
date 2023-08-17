@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 
 import { setUserToken } from "../../redux/auth";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
-import Client from "../Client";
+import Client from "../client";
 
-import styles from "./Auth.module.scss";
+import styles from "./auth.module.scss";
 
 const clientID = "ca290a97faf0451593abd11b5a869f2e";
 

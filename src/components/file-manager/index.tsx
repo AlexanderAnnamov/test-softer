@@ -7,11 +7,11 @@ import { selectUploadFiles } from "../../redux/uploadFiles";
 import { setRequestFiles } from "../../redux/uploadFiles";
 import { IFile } from "../../models/IFile";
 
-import FileItem from "../FileItem";
+import FileItem from "../file-item";
 
-import FileSkeleton from "./FileSkeleton";
+import FileSkeleton from "./file-manager-skeleton";
 
-import styles from "./File.module.scss";
+import styles from "./file-manager.module.scss";
 
 
 const FileManager: React.FC = () => {
@@ -28,7 +28,6 @@ const FileManager: React.FC = () => {
     <FileSkeleton key={index} />
   ));
  
-
   const contextMenu = React.useMemo<ContextMenuItem[]>(() => [
 
     { name: "Новый файл",onClick: () => console.log("New file")},

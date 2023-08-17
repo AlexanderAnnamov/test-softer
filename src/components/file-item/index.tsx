@@ -11,7 +11,7 @@ import { removeRequestFile } from "../../redux/uploadFiles";
 import { useContextMenu } from "../../hooks/useContextMenu";
 import { setIsLoading } from "../../redux/fileManager";
 
-import styles from "./FileItem.module.scss";
+import styles from "./file-item.module.scss";
 
 export const extention = {
   image: imageImg,

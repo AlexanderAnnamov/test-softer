@@ -1,8 +1,8 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom";
 
-import Auth from "./pages/Auth";
-import Client  from "./pages/Client";
+import Auth from "./pages/auth";
+import Client  from "./pages/client";
 import "./scss/app.scss";
 
 

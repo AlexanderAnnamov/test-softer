@@ -8,10 +8,10 @@ import App from "./App";
 
 import { ContextMenuProvider } from "./context/ContextMenu/ContextMenu.provider";
 
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
+
 root.render(
   <ContextMenuProvider>
     <Provider store={store}>

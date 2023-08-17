@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { setWarningDoubleFile } from "../../redux/uploadFiles";
 
-import PreviewFileItem from "../PreviewFileItem";
+import SelectedFileItem from "../selected-file-item";
 
 import { selectUploadFiles } from "../../redux/uploadFiles";
 
-import styles from "./PreviewUpFiles.module.scss";
+import styles from "./selected-files.module.scss";
 
 
-const PreviewUpFiles: React.FC = () => {
+const SelectedFiles: React.FC = () => {
 
   const {handleFiles, warningDoubleFile} = useSelector(selectUploadFiles);
 
@@ -36,7 +36,7 @@ const PreviewUpFiles: React.FC = () => {
       </div>
       <div className={styles.previewUpFiles}>
         {handleFiles.map((obj, idx) => (
-          <PreviewFileItem
+          <SelectedFileItem
             key={idx}
             name={obj.name}
             size={obj.size}
@@ -51,4 +51,4 @@ const PreviewUpFiles: React.FC = () => {
   );
 };
 
-export default PreviewUpFiles;
+export default SelectedFiles;

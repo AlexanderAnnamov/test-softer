@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { setHandleFiles } from "../../redux/uploadFiles";
 
-import styles from "./DragAndDrop.module.scss";
+import styles from "./drag-and-drop.module.scss";
 
 const DragAndDrop: React.FC = () => {
 

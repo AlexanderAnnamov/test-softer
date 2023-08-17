@@ -12,7 +12,7 @@ import {
   setIsLoading,
 } from "../../redux/uploadFiles";
 
-import styles from "./FileUploadPanel.module.scss";
+import styles from "./file-upload.module.scss";
 
 export const FileUploadPanel: React.FC = () => {
   

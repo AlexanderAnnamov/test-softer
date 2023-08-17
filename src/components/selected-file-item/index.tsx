@@ -2,21 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { removeHandleFile } from "../../redux/uploadFiles";
-import { extention } from "../FileItem";
+import { extention } from "../file-item";
 
 import deleteImg from "../../assets/img/delete-preview.svg";
 import loadingImg from "../../assets/img/loading.gif";
 
-import styles from "./PreviewFileItem.module.scss";
+import styles from "./selected-file-item.module.scss";
 
-type PreviewFileItemProps = {
+type SelectedFileItemProps = {
   name: string,
   size: string,
   type: string,
   date: string,
 }
 
-const PreviewFileItem: React.FC<PreviewFileItemProps> = ({ name, date, size, type }) => {
+const SelectedFileItem: React.FC<SelectedFileItemProps> = ({ name, date, size, type }) => {
   
   const isLoading = useSelector((state: any) => state.uploadFiles.isLoading);
 
@@ -67,4 +67,4 @@ const PreviewFileItem: React.FC<PreviewFileItemProps> = ({ name, date, size, typ
   );
 };
 
-export default PreviewFileItem;
+export default SelectedFileItem;

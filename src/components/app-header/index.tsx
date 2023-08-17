@@ -8,15 +8,15 @@ import logoImg from "../../assets/img/softer.png";
 import logoutImg from "../../assets/img/logout.svg";
 import userImg from "../../assets/img/user.png";
 
-import UserSkeleton from "./UserSkeleton";
+import UserSkeleton from "./user-skeleton";
 
-import styles from "./Header.module.scss";
+import styles from "./app-header.module.scss";
 
 type IHeader = {
   logout?: () => void
 }
 
-const Header: React.FC<IHeader> = ({ logout }) => {
+const AppHeader: React.FC<IHeader> = ({ logout }) => {
 
   const token = useSelector((state: any) => state.auth.oAuthToken);
   const [userId, setUserId] = React.useState<IUser>();
@@ -86,4 +86,4 @@ const Header: React.FC<IHeader> = ({ logout }) => {
   );
 };
 
-export default Header;
+export default AppHeader;

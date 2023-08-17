@@ -2,16 +2,14 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 
-// import { uploadFiles } from "../../redux/uploadFiles";
+import { selectUploadFiles } from "../../redux/uploadFiles";
 
-import styles from "./Statisticks.module.scss";
+import styles from "./statistics.module.scss";
 
 const Statistics: React.FC = () => {
 
-  const files = useSelector((state: any) => state.uploadFiles.handleFiles);
-  const success = useSelector((state: any) => state.uploadFiles.counterSuccessUp);
-
-  // const [files, success] = useSelector(uploadFiles)
+  const {handleFiles, counterSuccessUp} = useSelector(selectUploadFiles);
+  
   const greenIndicator = styles.statistics__text_indicator + " " + styles.statistics__text_green;
 
   return (
@@ -21,12 +19,12 @@ const Statistics: React.FC = () => {
           <li className={styles.statistics__text}>Файлы готовые к загрузке:</li>
           <li
             className={
-              files.length !== 0
+              handleFiles.length !== 0
                 ? greenIndicator
                 : styles.statistics__text_indicator
             }
           >
-            {files.length}
+            {handleFiles.length}
           </li>
         </ul>
         <ul className={styles.statistics__row}>
@@ -35,10 +33,10 @@ const Statistics: React.FC = () => {
           </li>
           <li
             className={
-              success !== 0 ? greenIndicator : styles.statistics__text_indicator
+              counterSuccessUp !== 0 ? greenIndicator : styles.statistics__text_indicator
             }
           >
-            {success}
+            {counterSuccessUp}
           </li>
         </ul>
         <ul className={styles.statistics__row}>

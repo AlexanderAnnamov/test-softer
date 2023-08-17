@@ -1,8 +1,8 @@
 import React from "react";
 
-import styles from "./Client.module.scss";
+import styles from "./client.module.scss";
 
-const LoadingRemove = () => {
+const LoadingRemoveFile = () => {
   return (
     <div className={styles.loadingRemove}>
       <p>Удаление</p>
@@ -11,4 +11,4 @@ const LoadingRemove = () => {
   );
 };
 
-export default LoadingRemove;
+export default LoadingRemoveFile;
