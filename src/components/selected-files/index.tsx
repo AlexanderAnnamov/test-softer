@@ -1,14 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setWarningDoubleFile } from "../../redux/uploadFiles";
+import { setWarningDoubleFile, selectUploadFiles } from "../../redux/upload-files/slice";
 
 import SelectedFileItem from "../selected-file-item";
 
-import { selectUploadFiles } from "../../redux/uploadFiles";
-
 import styles from "./selected-files.module.scss";
-
 
 const SelectedFiles: React.FC = () => {
 

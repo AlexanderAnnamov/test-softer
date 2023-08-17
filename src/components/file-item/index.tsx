@@ -7,9 +7,9 @@ import unknownImg from "../../assets/img/unknown.png";
 import videoImg from "../../assets/img/video.png";
 import documentImg from "../../assets/img/document.svg";
 
-import { removeRequestFile } from "../../redux/uploadFiles";
+import { removeRequestFile } from "../../redux/file-manager/slice";
+import { setIsLoading } from "../../redux/file-manager/slice";
 import { useContextMenu } from "../../hooks/useContextMenu";
-import { setIsLoading } from "../../redux/fileManager";
 
 import styles from "./file-item.module.scss";
 

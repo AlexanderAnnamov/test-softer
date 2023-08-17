@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { removeHandleFile } from "../../redux/uploadFiles";
+import { removeHandleFile } from "../../redux/upload-files/slice";
 import { extention } from "../file-item";
 
 import deleteImg from "../../assets/img/delete-preview.svg";

@@ -2,15 +2,14 @@ import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectUploadFiles } from "../../redux/uploadFiles";
-
 import {
+  selectUploadFiles,
   setWarningDoubleFile,
   removeHandleFile,
   resetSession,
   setCounterSuccessUp,
   setIsLoading,
-} from "../../redux/uploadFiles";
+} from "../../redux/upload-files/slice";
 
 import styles from "./file-upload.module.scss";
 

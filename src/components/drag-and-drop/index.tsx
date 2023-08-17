@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { setHandleFiles } from "../../redux/uploadFiles";
+import { setHandleFiles } from "../../redux/upload-files/slice";
 
 import styles from "./drag-and-drop.module.scss";
 

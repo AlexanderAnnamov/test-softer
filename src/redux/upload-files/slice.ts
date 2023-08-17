@@ -1,17 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type FileItem = {
-  name: string,
-  downloadUrl: string,
-  extentionFile: string,
-  previewFile: string,
-  path: string,
-  idx: number
-}
-
 interface UploadFilesState {
   handleFiles: any,
-  requestFiles: FileItem[],
   warningDoubleFile: boolean,
   counterSuccessUp: number,
   isLoading: boolean,
@@ -19,7 +9,6 @@ interface UploadFilesState {
 
 const initialState: UploadFilesState = {
   handleFiles: [],
-  requestFiles: [],
   warningDoubleFile: false,
   counterSuccessUp: 0,
   isLoading: false,
@@ -47,14 +36,7 @@ export const uploadFilesSlice = createSlice({
       state.handleFiles = [];
       state.counterSuccessUp = 0;
     },
-    setRequestFiles: (state, action) => {
-      state.requestFiles = action.payload;
-    },
-    removeRequestFile: (state, action) => {
-      state.requestFiles = state.requestFiles.filter((item) => {
-        return item !== state.requestFiles[action.payload];
-      });
-    },
+    
     setWarningDoubleFile: (state, action) => {
       state.warningDoubleFile = action.payload;
     },
@@ -75,8 +57,8 @@ export const {
   setHandleFiles,
   removeHandleFile,
   resetSession,
-  setRequestFiles,
-  removeRequestFile,
+  // setRequestFiles,
+  // removeRequestFile,
   setWarningDoubleFile,
   setCounterSuccessUp,
   setIsLoading,

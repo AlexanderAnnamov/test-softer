@@ -2,7 +2,7 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 
-import { selectUploadFiles } from "../../redux/uploadFiles";
+import { selectUploadFiles } from "../../redux/upload-files/slice";
 
 import styles from "./statistics.module.scss";
 
